@@ -80,36 +80,48 @@ public class PettyApp extends AppCompatActivity {
                 String interest = Hinterest.getText().toString();
                 String total = Htotal.getText().toString();
 
+                //computation
                 int mnt=Integer.parseInt(months);
                 int ln=Integer.parseInt(loan);
+
+
                 int num = 5000;
+                int mont;
                 int sum ;
                 int monthlyP;
+                int itr;
+                int pty;
+                int amortization;
 
-              /*  if (ln < num) {
-                    sum = (int) (ln * 0.01);
-                    mnt = (mnt * ln);
-                    monthlyP= sum + mnt;
-                    return;
-                }
+                    mont= (mnt / ln);// Pag kuha an montly payment w/o interest
+                    sum = (int) (ln * 0.01); //pag kuha interest
+                    monthlyP= sum +mont; // pag compute an monthly with interest
 
-               */
+                    itr=sum*mnt; //pag kuha an overall interest
+                    pty=mnt*ln; // pag compute han overall without interest
+
+                    amortization= itr+pty;// total loan
+
+                String amor = Integer.toString(amortization);
+                String interes = Integer.toString(itr);
+                String montP = Integer.toString(monthlyP);
 
                 if(TextUtils.isEmpty(name)){
                     Hname.setError("Name is Required");
                     return;
 
                 }
+                if(ln>=num){
+                    Hloan.setError("Loan must be bellow 5000");
+                    return;
+                }
                 if(TextUtils.isEmpty(loan)){
                     Hloan.setError("Loan Is required");
                     return;
                 }
-                if(ln>5000){
-                    Hloan.setError("Loan must be bellow 5000");
-                    return;
-                }
-                if(monthly!=null){
-                    Hmonthly.setError("dont put any number");
+
+                if(TextUtils.isEmpty(monthly)){
+                    Hmonthly.setText(montP);
                     return;
                 }
                 if(TextUtils.isEmpty(months)){
@@ -120,12 +132,12 @@ public class PettyApp extends AppCompatActivity {
                     Hmonths.setError("Maximum is 12 months");
                     return;
                 }
-                if(interest !=null){
-                    Hinterest.setError("dont put number");
+                if(TextUtils.isEmpty(interest)){
+                    Htotal.setText(interes);
                     return;
                 }
-                if(total!=null){
-                    Htotal.setError("dont put any number");
+                if(TextUtils.isEmpty(total)){
+                    Htotal.setText(amor);
                     return;
                 }
 
@@ -134,11 +146,11 @@ public class PettyApp extends AppCompatActivity {
 
                 Map<String, Object> petty = new HashMap<>();
                 petty.put("Name", name);
-                petty.put("Loan", loan);
-                petty.put("Montlhy", monthly);
+                petty.put("Loan", ln);
+                petty.put("Montlhy", montP);
                 petty.put("Months", months);
-                petty.put("Interest", interest);
-                petty.put("Total", total);
+                petty.put("Interest", interes);
+                petty.put("Total", amor);
 
                 // Add a new document with a generated ID
                 db.collection("petty")

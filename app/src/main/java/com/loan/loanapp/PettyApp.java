@@ -60,7 +60,6 @@ public class PettyApp extends AppCompatActivity {
                 finish();
             }
         });
-
         submit.setOnClickListener(new View.OnClickListener() {
 
             @Override

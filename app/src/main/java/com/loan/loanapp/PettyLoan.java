@@ -19,7 +19,7 @@ import com.google.firebase.firestore.FirebaseFirestoreException;
 
 public class PettyLoan extends AppCompatActivity {
     Button pettyBTN;
-    TextView loan;
+    TextView name,Mpayment,total;
     private FirebaseAuth fAuth;
     private FirebaseFirestore db;
     String userID;
@@ -32,7 +32,9 @@ public class PettyLoan extends AppCompatActivity {
         getSupportActionBar().setTitle("Petty Loan");
 
         pettyBTN = findViewById(R.id.pettyBTN);
-
+        name = findViewById(R.id.Name);
+        Mpayment = findViewById(R.id.mpayment);
+        total = findViewById(R.id.total);
 
         fAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
@@ -42,11 +44,12 @@ public class PettyLoan extends AppCompatActivity {
         DocumentReference documentReference= db.collection("petty").document(userID);
         documentReference.addSnapshotListener(this, new EventListener<DocumentSnapshot>() {
             @Override
-            public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
-
+            public void onEvent(@Nullable DocumentSnapshot documentSnapshot,@Nullable FirebaseFirestoreException e) {
+             name.setText(documentSnapshot.getString("name"));
+             Mpayment.setText(documentSnapshot.getString("Monthly"));
+             total.setText(documentSnapshot.getString("Total"));
             }
         });
-
 
         pettyBTN.setOnClickListener(new View.OnClickListener() {
             @Override

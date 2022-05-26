@@ -6,13 +6,16 @@
     app:startDestination="@id/mainActivity">
 
     <activity
-        android:id="@+id/mainActivity"
-        android:name="com.loan.loanapp.MainActivity"
-        android:label="activity_main"
-        tools:layout="@layout/activity_main" />
-    <activity
         android:id="@+id/mainPage"
         android:name="com.loan.loanapp.MainPage"
         android:label="activity_main_page"
         tools:layout="@layout/activity_main_page" />
+    <navigation android:id="@+id/navigation"
+        app:startDestination="@id/mainActivity">
+        <activity
+            android:id="@+id/mainActivity"
+            android:name="com.loan.loanapp.MainActivity"
+            android:label="activity_main"
+            tools:layout="@layout/activity_main" />
+    </navigation>
 </navigation>

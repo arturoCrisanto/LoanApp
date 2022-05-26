@@ -1,4 +1,5 @@
 # LoanApp
-other error need some changes
-petty app and loan is currently in proggres 
-emergency loan is not functioning
+fell layout nala it aradjust 
+an emergency not fully functioning 
+pero may code na adto
+
